@@ -1,0 +1,80 @@
+[
+  {
+    "rule_id": "SIEM-R01",
+    "rule_name": "허니팟 디코이 카나리 탐침 탐지 (Decoy Canary Trap)",
+    "target_field": "request_path",
+    "operator": "IN_DECOY_LIST",
+    "threshold_count": 1,
+    "time_window_sec": 60,
+    "severity": "CRITICAL",
+    "action": "BLOCK_IP_403",
+    "webhook_alert": true,
+    "enabled": true,
+    "description": "가짜 미끼 경로(/.env, /wp-admin 등) 접근 시 즉시 차단 및 알림"
+  },
+  {
+    "rule_id": "SIEM-R02",
+    "rule_name": "계정 무차별 대입 공격 탐지 (Brute-Force Anomaly)",
+    "target_field": "failed_logins",
+    "operator": "GTE",
+    "threshold_count": 5,
+    "time_window_sec": 60,
+    "severity": "HIGH",
+    "action": "LOCK_ACCOUNT_15M",
+    "webhook_alert": true,
+    "enabled": true,
+    "description": "동일 계정 또는 IP에서 1분 내 5회 이상 로그인 실패 시 계정 동결"
+  },
+  {
+    "rule_id": "SIEM-R03",
+    "rule_name": "수평적 권한 상승 탐지 (BOLA Access Violation)",
+    "target_field": "document_owner_mismatch",
+    "operator": "EQUALS",
+    "threshold_count": 1,
+    "time_window_sec": 60,
+    "severity": "HIGH",
+    "action": "HTTP_403_FORBIDDEN",
+    "webhook_alert": true,
+    "enabled": true,
+    "description": "타인 결재 기안서 또는 비인가 기밀 문서 접근 시도 거부"
+  },
+  {
+    "rule_id": "SIEM-R04",
+    "rule_name": "AST 쿼리 정적 검증 위반 (SQL Injection Signature)",
+    "target_field": "ast_constant_check",
+    "operator": "NON_CONSTANT_STRING",
+    "threshold_count": 1,
+    "time_window_sec": 10,
+    "severity": "CRITICAL",
+    "action": "DROP_EXECUTION",
+    "webhook_alert": true,
+    "enabled": true,
+    "description": "파이썬 AST 쿼리 검사 시 문자열 병합 쿼리 적발 즉시 차단"
+  },
+  {
+    "rule_id": "SIEM-R05",
+    "rule_name": "SHA-256 파일 무결성 변조 적발 (FIM Hash Tampering)",
+    "target_field": "file_hash_diff",
+    "operator": "HASH_MISMATCH",
+    "threshold_count": 1,
+    "time_window_sec": 10,
+    "severity": "CRITICAL",
+    "action": "ALERT_SECURITY_TEAM",
+    "webhook_alert": true,
+    "enabled": true,
+    "description": "핵심 파이썬 및 환경설정 파일의 SHA-256 베이스라인 불일치 시 경보"
+  },
+  {
+    "rule_id": "SIEM-R06",
+    "rule_name": "[긴급배포] 크리덴셜 스터핑 대규모 분산 무차별 대입 탐지",
+    "target_field": "credential_stuffing_rate",
+    "operator": "GTE",
+    "threshold_count": 10,
+    "time_window_sec": 60,
+    "severity": "CRITICAL",
+    "action": "BLOCK_IP_403",
+    "webhook_alert": true,
+    "enabled": true,
+    "description": "분산 IP 대역에서의 대규모 사전 대입 시 실시간 격리"
+  }
+]

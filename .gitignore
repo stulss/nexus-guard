@@ -1,0 +1,37 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Unit test / coverage reports
+.pytest_cache/
+.coverage
+
+# Virtual Environments
+.env
+.venv
+env/
+venv/
+
+# Logs (keep directory)
+logs/*.log
+logs/*.jsonl
+!logs/.gitkeep
+
+# Reports (keep directory)
+exports/reports/*.html
+exports/reports/*.csv
+exports/reports/*.json
+!exports/reports/.gitkeep
+
+# IDEs & OS
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+.DS_Store

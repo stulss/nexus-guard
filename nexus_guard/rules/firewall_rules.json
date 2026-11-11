@@ -1,0 +1,52 @@
+[
+  {
+    "id": "FW-001",
+    "action": "BLOCK",
+    "interface": "WAN",
+    "protocol": "TCP",
+    "source_ip": "ANY",
+    "dest_port": "5070",
+    "description": "악성 디코이 탐침 IP 인그레스 동적 차단 룰 템플릿",
+    "enabled": false
+  },
+  {
+    "id": "FW-002",
+    "action": "BLOCK",
+    "interface": "WAN",
+    "protocol": "TCP",
+    "source_ip": "ANY",
+    "dest_port": "3307",
+    "description": "외부 공용망에서의 MySQL 인스턴스 직접 접속 차단",
+    "enabled": true
+  },
+  {
+    "id": "FW-003",
+    "action": "PASS",
+    "interface": "LAN",
+    "protocol": "ANY",
+    "source_ip": "127.0.0.1",
+    "dest_port": "ANY",
+    "description": "로컬 루프백 호스트 간 상호 통신 전면 허용",
+    "enabled": true
+  },
+  {
+    "id": "FW-004",
+    "action": "PASS",
+    "interface": "WAN",
+    "protocol": "TCP",
+    "source_ip": "ANY",
+    "dest_port": "5070",
+    "description": "공개 웹 포털 인바운드 HTTP 서비스 정상 수신",
+    "enabled": true
+  },
+  {
+    "id": "FW-005",
+    "action": "BLOCK",
+    "interface": "WAN",
+    "protocol": "TCP",
+    "source_ip": "ANY",
+    "dest_port": "ANY",
+    "description": "사용자 정의 방화벽 규칙",
+    "enabled": true
+  }
+]

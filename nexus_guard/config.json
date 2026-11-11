@@ -1,0 +1,104 @@
+{
+  "_comment": "NEXUS-GUARD 통합 환경 설정 파일 (신규 설치: 사용자 지정 필요 / 1-클릭 가이드 지원)",
+  "version": "2.5.0-LTS",
+  "deployment_mode": "standalone",
+  "target_service": {
+    "web_portal_url": "",
+    "web_portal_host": "",
+    "web_portal_port": "",
+    "db_host": "",
+    "db_port": "",
+    "db_name": "",
+    "db_user": ""
+  },
+  "ai_xdr_engine": {
+    "primary_provider": "groq",
+    "groq_api_key": "",
+    "groq_model": "openai/gpt-oss-120b",
+    "nvidia_api_key": "",
+    "nvidia_base_url": "https://integrate.api.nvidia.com/v1",
+    "nvidia_model": "nvidia/llama-3.1-nemotron-70b-instruct",
+    "ollama_base_url": "",
+    "ollama_model": "qwen2.5:7b",
+    "threat_score_threshold": 80,
+    "timeout_seconds": 10
+  },
+  "external_integrations": {
+    "pfsense": {
+      "enabled": false,
+      "host": "",
+      "webgui_port": 443,
+      "feed_url": "",
+      "alias_name": "",
+      "polling_interval_minutes": 1,
+      "block_duration_minutes": 15,
+      "sync_windows_netsh": true,
+      "api_token": ""
+    },
+    "graylog": {
+      "enabled": false,
+      "host": "",
+      "gelf_udp_port": 12201,
+      "web_port": 9000,
+      "protocol": "UDP",
+      "stream_name": "",
+      "min_log_level": "WARNING",
+      "facility": "nexus-guard-soc"
+    },
+    "wazuh": {
+      "enabled": false,
+      "manager_host": "",
+      "manager_port": 1514,
+      "api_port": 55000,
+      "agent_id": "",
+      "agent_name": "",
+      "fim_interval_seconds": 10,
+      "hash_algorithm": "SHA-256",
+      "monitored_paths": ""
+    },
+    "webhooks": {
+      "discord_alert_url": "",
+      "slack_alert_url": "",
+      "n8n_soar_url": "",
+      "alert_threshold": "HIGH",
+      "enable_incident_auto_dispatch": false
+    }
+  },
+  "active_defense": {
+    "defense_mode": "ON",
+    "block_duration_minutes": 15,
+    "decoy_paths": [
+      "/.env",
+      "/.git",
+      "/.git/config",
+      "/.aws/credentials",
+      "/wp-login.php",
+      "/wp-admin",
+      "/phpmyadmin",
+      "/admin.php",
+      "/config.json",
+      "/.ds_store"
+    ],
+    "protected_whitelist_ips": [
+      "127.0.0.1",
+      "::1"
+    ]
+  },
+  "file_integrity_monitoring": {
+    "auto_watch_enabled": true,
+    "polling_interval_seconds": 10,
+    "watch_directories": [
+      "app",
+      "db",
+      "nexus_guard"
+    ],
+    "watch_extensions": [
+      ".py",
+      ".env",
+      ".sql",
+      ".json",
+      ".html",
+      ".js"
+    ]
+  }
+}

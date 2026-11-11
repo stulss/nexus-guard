@@ -1,0 +1,104 @@
+{
+  "_comment": "NEXUS-GUARD 통합 환경 설정 파일 (모든 네트워크 주소, 포트, API 키, 외부 장비 개별 상세 설정 - 예시 템플릿)",
+  "version": "2.5.0-LTS",
+  "target_service": {
+    "web_portal_url": "http://127.0.0.1:5070",
+    "web_portal_host": "127.0.0.1",
+    "web_portal_port": 5070,
+    "db_host": "127.0.0.1",
+    "db_port": 3307,
+    "db_name": "nexus",
+    "db_user": "nexus_app"
+  },
+  "ai_xdr_engine": {
+    "primary_provider": "groq",
+    "groq_api_key": "",
+    "groq_model": "openai/gpt-oss-120b",
+    "nvidia_api_key": "",
+    "nvidia_base_url": "https://integrate.api.nvidia.com/v1",
+    "nvidia_model": "nvidia/llama-3.1-nemotron-70b-instruct",
+    "ollama_base_url": "http://127.0.0.1:11434",
+    "ollama_model": "qwen2.5:7b",
+    "threat_score_threshold": 80,
+    "timeout_seconds": 10
+  },
+  "external_integrations": {
+    "pfsense": {
+      "enabled": true,
+      "host": "192.168.3.1",
+      "webgui_port": 443,
+      "feed_url": "http://127.0.0.1:5070/feeds/xdr-blocked-ips.txt",
+      "alias_name": "NEXUS_XDR_BLOCKED",
+      "polling_interval_minutes": 1,
+      "block_duration_minutes": 15,
+      "sync_windows_netsh": true,
+      "api_token": ""
+    },
+    "graylog": {
+      "enabled": true,
+      "host": "192.168.3.10",
+      "gelf_udp_port": 12201,
+      "web_port": 9000,
+      "protocol": "UDP",
+      "stream_name": "NEXUS_SECURITY_STREAM",
+      "min_log_level": "WARNING",
+      "facility": "nexus-guard-soc"
+    },
+    "wazuh": {
+      "enabled": true,
+      "manager_host": "192.168.3.20",
+      "manager_port": 1514,
+      "api_port": 55000,
+      "agent_id": "001",
+      "agent_name": "nexus-endpoint-01",
+      "fim_interval_seconds": 10,
+      "hash_algorithm": "SHA-256",
+      "monitored_paths": "app, nexus_guard, tests, config.json, .env"
+    },
+    "webhooks": {
+      "discord_alert_url": "",
+      "slack_alert_url": "",
+      "n8n_soar_url": "http://192.168.3.15:5678/webhook/nexus-ticket-action",
+      "alert_threshold": "HIGH",
+      "enable_incident_auto_dispatch": true
+    }
+  },
+  "active_defense": {
+    "defense_mode": "ON",
+    "block_duration_minutes": 15,
+    "decoy_paths": [
+      "/.env",
+      "/.git",
+      "/.git/config",
+      "/.aws/credentials",
+      "/wp-login.php",
+      "/wp-admin",
+      "/phpmyadmin",
+      "/admin.php",
+      "/config.json",
+      "/.ds_store"
+    ],
+    "protected_whitelist_ips": [
+      "127.0.0.1",
+      "::1",
+      "192.168.3.10",
+      "192.168.3.14",
+      "192.168.3.15"
+    ]
+  },
+  "file_integrity_monitoring": {
+    "auto_watch_enabled": true,
+    "polling_interval_seconds": 10,
+    "watch_directories": [
+      "app",
+      "db",
+      "nexus_guard"
+    ],
+    "watch_extensions": [
+      ".py",
+      ".env",
+      ".sql",
+      ".json"
+    ]
+  }
+}
