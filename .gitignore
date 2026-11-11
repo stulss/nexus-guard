@@ -30,6 +30,12 @@ exports/reports/*.csv
 exports/reports/*.json
 !exports/reports/.gitkeep
 
+# Large Media Files (Video > 100MB for GitHub limit)
+*.mp4
+*.avi
+*.mov
+*.wmv
+
 # IDEs & OS
 .vscode/
 .idea/
