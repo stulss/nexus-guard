@@ -7,9 +7,10 @@ https://github.com/stulss/nexus-guard
 
 2. 개인 포트폴리오 PPT 또는 PDF:
 • 웹 포트폴리오 라이브: https://nexus-portfolio-nu.vercel.app
+• [신규] 넥서스가드 공식 발표 슬라이드 PPTX: https://github.com/stulss/nexus-guard/raw/main/docs/presentation/NEXUS_GUARD_발표자료.pptx
+• [신규] 넥서스가드 공식 발표 슬라이드 PDF: https://github.com/stulss/nexus-guard/raw/main/docs/presentation/NEXUS_GUARD_발표자료.pdf
 • 포트폴리오 마스터 PDF: https://github.com/stulss/nexus-guard/raw/main/docs/presentation/NEXUS_포트폴리오.pdf
-• 최종 발표자료 PPTX: https://github.com/stulss/nexus-guard/raw/main/docs/presentation/NEXUS_WORK_홍주형_발표자료_최종.pptx
-(로컬 원본: 바탕화면 'NEXUS-GUARD_포트폴리오/presentation/' 폴더에 보관 완료)
+(바탕화면에 'NEXUS_GUARD_발표자료.pptx' 및 'NEXUS_GUARD_발표자료.pdf' 직접 배치 완료)
 
 3. 이력서·자기소개서 기본본:
 • 상세 전문: https://github.com/stulss/nexus-guard/blob/main/docs/RESUME_홍주형_이력서_자기소개서.md
