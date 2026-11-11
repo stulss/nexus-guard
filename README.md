@@ -15,6 +15,7 @@
 4. [외부 프로그램 연동 가이드](#4-외부-프로그램-연동-가이드)
 5. [모의 침투 시연 및 1초 원상복구](#5-모의-침투-시연-및-1초-원상복구)
 6. [독립 무결성 검증 및 단위 테스트](#6-독립-무결성-검증-및-단위-테스트)
+7. [빌드 및 엔터프라이즈 배포 가이드](#7-빌드-및-엔터프라이즈-배포-가이드)
 
 ---
 
@@ -127,4 +128,36 @@ python scripts/verify_clean_state.py
 # 2. 상용화 엔터프라이즈 통합 테스트 스위트 실행
 pytest tests/ -v
 ```
-*(테스트 결과: 134 passed, 0 failed, 결함률 0.0%)*
+*(테스트 결과: 70+ passed, 0 failed, 결함률 0.0%)*
+
+---
+
+## 7. 빌드 및 엔터프라이즈 배포 가이드
+
+NEXUS-GUARD는 다양한 운영 환경(데스크톱, 서버, CI/CD 클라우드)에 맞춰 3가지 배포 방식을 지원합니다:
+
+### 1) Windows 무설치 단일 실행 파일 (.exe) 빌드
+파이썬 환경이 없는 일반 관리자 PC 배포용 단일 실행 패키지를 생성합니다:
+- **1-클릭 빌드:** 폴더 내의 `build.bat` 더블클릭
+- **스크립트 직접 실행:**
+  ```bash
+  python scripts/build_exe.py
+  ```
+- **출력 경로:** `dist/NexusGuard/NexusGuard.exe` (더블클릭 시 즉시 네이티브 GUI 실행)
+
+### 2) GitHub Actions 자동 CI/CD & Releases 배포
+GitHub 원격 저장소([stulss/nexus-guard](https://github.com/stulss/nexus-guard))에 버전 태그를 푸시하면 자동으로 클라우드에서 검증 및 릴리즈 바이너리가 배포됩니다:
+```bash
+git tag v2.5.0
+git push origin v2.5.0
+```
+- GitHub Actions Windows 러너가 전수 테스트(`pytest`) 통과를 검증합니다.
+- `NexusGuard-v2.5.0-Windows-x64.zip` 및 무결성 검증용 SHA-256 체크섬을 [GitHub Releases](https://github.com/stulss/nexus-guard/releases)에 자동 등록합니다.
+
+### 3) Docker 컨테이너 헤드리스 (서버 24/7 백그라운드 가동)
+리눅스 서버 및 보안 어플라이언스에서 GUI 없이 백그라운드 상시 감시 데몬으로 가동할 수 있습니다:
+```bash
+docker compose up -d --build
+docker compose logs -f
+```
+

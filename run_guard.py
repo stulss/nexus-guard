@@ -12,7 +12,24 @@ BASE_DIR = Path(__file__).resolve().parent
 if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
 
-from nexus_guard.gui.native_app import main
+
+def main():
+    # Headless / Docker / CLI mode check
+    is_headless = "--headless" in sys.argv or "--cli" in sys.argv
+    if not is_headless and sys.platform != "win32" and not os.environ.get("DISPLAY"):
+        is_headless = True
+
+    if is_headless:
+        # Pass remaining arguments to CLI
+        filtered_args = [a for a in sys.argv[1:] if a not in ("--headless", "--cli")]
+        sys.argv = [sys.argv[0]] + (filtered_args if filtered_args else ["status"])
+        from nexus_guard.cli.guard_cli import main as cli_main
+        cli_main()
+    else:
+        from nexus_guard.gui.native_app import main as gui_main
+        gui_main()
+
 
 if __name__ == "__main__":
     main()
+

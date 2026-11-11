@@ -1,0 +1,17 @@
+services:
+  nexus-guard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nexus-guard:latest
+    container_name: nexus-guard-daemon
+    restart: unless-stopped
+    volumes:
+      - ./nexus_guard/config.json:/app/nexus_guard/config.json
+      - ./nexus_guard/rules:/app/nexus_guard/rules
+      - ./logs:/app/logs
+      - ./exports/reports:/app/exports/reports
+    environment:
+      - PYTHONUNBUFFERED=1
+      - NEXUS_GUARD_ENV=production
+    network_mode: host
