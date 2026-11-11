@@ -15,6 +15,12 @@
   - **이시헌:** 네트워크 경계 보안 엔지니어링 (pfSense 방화벽 구축, HAProxy WAF 규칙, 망 연동 피드)
   - **진혜정:** 클라우드 & 가상화 인프라 엔지니어링 (Docker 가상화 환경 구축, 리소스 모니터링)
 * **개인 GitHub 저장소:** [https://github.com/stulss/nexus-guard](https://github.com/stulss/nexus-guard)
+* **📁 핵심 제출 문서 & 다운로드 링크:**
+  - 🖥️ **공식 발표 슬라이드 PPTX:** [NEXUS_GUARD_발표자료.pptx](https://github.com/stulss/nexus-guard/raw/main/docs/presentation/NEXUS_GUARD_발표자료.pptx)
+  - 📄 **공식 발표 슬라이드 PDF:** [NEXUS_GUARD_발표자료.pdf](https://github.com/stulss/nexus-guard/raw/main/docs/presentation/NEXUS_GUARD_발표자료.pdf)
+  - 📑 **홍주형 이력서 & 자기소개서 (공식 PDF):** [홍주형_이력서_자기소개서.pdf](https://github.com/stulss/nexus-guard/raw/main/docs/presentation/홍주형_이력서_자기소개서.pdf)
+  - 📝 **홍주형 이력서 & 자기소개서 (전문 MD):** [RESUME_홍주형_이력서_자기소개서.md](https://github.com/stulss/nexus-guard/blob/main/docs/RESUME_홍주형_이력서_자기소개서.md)
+  - 🌐 **웹 포트폴리오 라이브:** [nexus-portfolio-nu.vercel.app](https://nexus-portfolio-nu.vercel.app)
 * **본인 단독 산출물 & 기여도 (100%):**
   1. `NEXUS-GUARD` 독립형 엔터프라이즈 데스크톱 GUI 관제센터 풀스택 개발 (`CustomTkinter` 기반)
   2. 100/100 무오탐 클린 슬레이트(Clean Slate) 아키텍처 및 70개 전수 자동화 테스트 스위트 작성

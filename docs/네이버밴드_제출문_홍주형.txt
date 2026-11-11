@@ -1,0 +1,105 @@
+[7. 개인 포트폴리오 정리 및 고도화] 최종 제출 (4조 홍주형)
+
+■ 제출 기본 정보 (공개 댓글 제출 양식)
+─────────────────────────────────────────────────────────────
+1. 개인 GitHub 저장소 주소:
+https://github.com/stulss/nexus-guard
+
+2. 개인 포트폴리오 PPT 또는 PDF:
+• 웹 포트폴리오 라이브: https://nexus-portfolio-nu.vercel.app
+• [신규] 넥서스가드 공식 발표 슬라이드 PPTX: https://github.com/stulss/nexus-guard/raw/main/docs/presentation/NEXUS_GUARD_발표자료.pptx
+• [신규] 넥서스가드 공식 발표 슬라이드 PDF: https://github.com/stulss/nexus-guard/raw/main/docs/presentation/NEXUS_GUARD_발표자료.pdf
+• 포트폴리오 마스터 PDF: https://github.com/stulss/nexus-guard/raw/main/docs/presentation/NEXUS_포트폴리오.pdf
+(바탕화면에 'NEXUS_GUARD_발표자료.pptx' 및 'NEXUS_GUARD_발표자료.pdf' 직접 배치 완료)
+
+3. 이력서·자기소개서 기본본:
+• [공식] 이력서·자기소개서 마스터 PDF: https://github.com/stulss/nexus-guard/raw/main/docs/presentation/홍주형_이력서_자기소개서.pdf
+• 상세 전문 마크다운: https://github.com/stulss/nexus-guard/blob/main/docs/RESUME_홍주형_이력서_자기소개서.md
+(바탕화면에 '홍주형_이력서_자기소개서.pdf' 직접 배치 완료)
+• 핵심 요약:
+  - 담당 역할: 포털 코어 아키텍트 & 보안 최고관리자 (NEXUS-GUARD 보안 관제센터 단독 설계 및 풀스택 개발 100%)
+  - 사용 기술: Python 3.11+, CustomTkinter, PyInstaller, Docker, MITRE ATT&CK Matrix v14, SHA-256 FIM, NVIDIA NIM(Llama-3.1-70B), Groq LPU, Windows netsh 호스트 방화벽, pfSense, Graylog, Wazuh, n8n SOAR
+  - 정량 성과: 자동화 테스트 70개 전수 통과(결함률 0.0%), 신규 설치 시 100점 만점 클린 슬레이트(Clean Slate) 아키텍처 완성, 디코이 탐침 시 0.1초 즉시 차단 및 0.8초(804ms) 원상복구(Clean-up) 구현, 17.5MB 단일 무설치 바이너리(.exe) 빌드 및 GitHub Actions CI/CD 파이프라인 구축
+
+4. 필수 한 줄 확인:
+"README대로 설치 → 동작 확인 → 담당 작업·개선점 정리 완료"
+─────────────────────────────────────────────────────────────
+
+
+■ 6대 평가 항목별 상세 정리 (현장 실측 및 증빙)
+
+■ 1) 혼자 프로젝트 설치 및 진행 가능하게 (새 PC / VM 환경 대응)
+• 무설치 원클릭 실행: Python 미설치 PC에서도 'dist/NexusGuard/NexusGuard.exe' 또는 'run_guard.bat' 더블클릭 1초 만에 네이티브 관제 콘솔 즉각 구동
+• 구성별 실행 명령 및 접속 주소·포트:
+  - 감시 대상 포털: http://127.0.0.1:5070 (Flask / WAF 미들웨어 인그레스 감시)
+  - 엔터프라이즈 DB: 127.0.0.1:3307 (MySQL 8.4 Docker / 43개 테이블 불변 트리거)
+  - pfSense 방화벽: https://192.168.3.10:443 (pfBlockerNG 자동 Drop 피드 연동)
+  - Graylog 중앙 SIEM: http://192.168.3.15:9000 (GELF UDP 12201 침해 로그 스트리밍)
+  - Wazuh EDR 에이전트: 192.168.3.15:1514 (Syscheck SHA-256 디지털 지문 검증)
+  - n8n SOAR 자동화: http://192.168.3.15:5678 (Discord 알림 & Jira 티켓 자동 발행)
+• Standalone 무중단 페일세이프: 외부 인프라가 꺼져 있는 독립 PC에서도 Windows 커널 netsh advfirewall(0.001초) 패킷 드롭과 로컬 FIM/AI로 100% 자율 방어 가동
+• 클린 베이스라인 검증: 'python scripts/verify_clean_state.py' 단독 실행 시 NIST 제로 트러스트 0건 위협, 100/100 만점 100% PASS 확인
+
+■ 2) 개인 GitHub 저장소 구성 (보안성 & 완결성)
+• 팀 프로젝트 명 & 원본 저장소: 4조 NEXUS 사내 인프라 보안 방어전 (https://github.com/stulss/nexus-work)
+• 팀원 R&R 분담:
+  - 홍주형 (본인): 포털 코어 아키텍트 & 보안 최고관리자 (NEXUS-GUARD 관제 콘솔 100% 단독 개발, 웹/DB 하드닝 총괄, 4중 AI-XDR 엔진 구축, SHA-256 FIM 감시기, CI/CD 배포)
+  - 김태빈: Graylog SIEM 룰셋(R1~R12), n8n SOAR 워크플로우 엔지니어링
+  - 이시헌: pfSense 경계 방화벽 구축, HAProxy WAF 규칙, 망 연동
+  - 진혜정: Docker 가상화 인프라 구축, 컨테이너 리소스 모니터링
+• 개인 독립 저장소: https://github.com/stulss/nexus-guard (홍주형 단독 100% 산출물)
+• 민감정보 완전 제거: 하드코딩 패스워드·토큰·API Key 0건 검증 완료, '.env.example' 및 'config.example.json' 표준 템플릿화
+• 연동 설정 파일 동봉:
+  - Graylog 콘텐츠 팩: integrations/graylog/ (event_definitions.json, inputs.json, streams.json)
+  - Wazuh 규칙 & 템플릿: integrations/wazuh/ (agent_fim_template.xml, manager_syslog_output_template.xml)
+  - n8n 워크플로 페이로드: integrations/n8n/ (R1~R10 시나리오별 JSON 8종 전수 동봉)
+
+■ 3) 실제 동작 확인 및 유지보수 가능한 코드 (실측 시간 & 증빙)
+• 공격 ➔ 탐지 ➔ 차단 ➔ 복구 실측 결과:
+  - 디코이(허니팟) 침투 탐지: 0.1초 만에 인그레스 403 차단 및 OS 커널 방화벽 드롭
+  - 4중 AI-XDR 하이브리드 트리아지: Groq LPU 실측 0.48초 / NVIDIA NIM 0.52초 복합 체인 분석
+  - 'demo_runner.py --cleanup' 원상복구: 실측 0.8047초 (804.7ms) 만에 1초 미만 클린 리셋 완료
+• 자동화 테스트 검증: 'python -m pytest tests/ -v' ➔ 70 / 70 passed in 10.67초 (결함률 0.0%)
+• 무편집 100% 실측 시연 동영상 증빙 완비:
+  - 영상명: 디코이 보안설정에 따른 비교 시연영상v2.mp4 (150.3MB Full-HD)
+  - 보관 경로: 바탕화면 'NEXUS-GUARD_포트폴리오/assets/videos/decoy_comparison_demo.mp4'
+  - 검증 내용:
+    * [00:00] 보안설정 OFF: 공격자가 /.env, /.git 접근으로 DB 비밀번호/API Key 탈취 성공
+    * [01:15] 보안설정 ON: 디코이 탐침 0.1초 즉시 차단 및 OS 커널 방화벽 격리
+    * [02:30] 실시간 전파: pfSense 및 Graylog GELF 12201, n8n SOAR Webhook 연동
+    * [03:10] 1초 원상복구: demo_runner.py --cleanup 롤백으로 정상 상태 복원
+
+■ 4) 개인 작업 내역 정확히 정리 (팀 공통 vs 본인 단독 기여 100%)
+• 팀 공통 영역:
+  - NEXUS WORK 사내 포털 인프라 기획 및 분산망 IP 대역 설계 (Kali 11번, pfSense 10번, 포털 14번, SOC 15번)
+• 홍주형 단독 100% 설계 및 구현 영역 (NEXUS-GUARD):
+  - 60FPS 하드웨어 가속 다크 테마 GUI 관제 콘솔 개발 (CustomTkinter 기반)
+  - 360도 레이더 회전 빔 및 GlassWire 스타일 실시간 트래픽 오실로스코프 파형 캔버스 렌더링
+  - NIST SP 800-207 제로 트러스트 기반 텔레메트리 클린 베이스라인(100점 만점 / 0건 위협) 확립
+  - MITRE ATT&CK Matrix v14 3계층 하이브리드 매핑 엔진 (공식 Navigator v4.5 Layer JSON 호환)
+  - SHA-256 FIM 무결성 감시기 & 능동 방어 디코이(허니팟) 트랩
+  - PyInstaller 17.5MB 단일 바이너리 패키징 및 GitHub Actions CI/CD 릴리즈 자동화
+
+■ 5) 개선점과 느낀 점 (PARR 구조화: 문제점 ➔ 원인 ➔ 해결 ➔ 결과)
+• Case 1: 초기 실행 시 공격자 잔류 및 감점 오탐 ➔ 클린 슬레이트(Clean Slate) 아키텍처 확립
+  - 문제/원인: 첫 실행 시 데모 더미 공격자가 잔류하여 65점으로 시작, 사용자 불신 유발
+  - 해결/결과: 코어 상태 머신을 0건으로 격리하고, 부팅 시 100점 만점을 보장하는 상태 머신과 'test_clean_slate.py' 테스트 구축 (신규 설치 0건 위협 검증 100% 통과)
+• Case 2: 레이더 및 SOC 전문 용어의 난해성 ➔ 비전문가/CISO 친화적 고대비 UX 개편
+  - 문제/원인: 360도 레이더 점/궤적 및 XDR 판정 문구가 비전문 관리자 시각에서 판독하기 어려움
+  - 해결/결과: 상단에 SentinelOne 스타일의 쉬운 한글 종합 판정 배너 배치, 4대 인프라 범례 점등, WCAG 2.x AA(대비율 4.5:1 이상) 네온 다크 테마 적용
+• Case 3: 새 PC 환경에서의 환경 종속성 ➔ 무설치 실행 파일 및 CI/CD 자동 배포
+  - 문제/원인: 파이썬 미설치 PC에서 환경 구축 번거로움 및 라이브러리 충돌 위험
+  - 해결/결과: 'build.bat' 및 'build_exe.py'를 제작하여 17.5MB 단일 바이너리 생성 및 Git Tag 푸시 시 GitHub Releases 자동 배포 파이프라인 완성
+• 공학적 성찰: "보안의 본질은 단순히 공격을 막는 테크닉을 넘어, 정상 상태를 오탐 없이 신뢰할 수 있게 증명(Clean Slate)하는 것에서 출발함을 배웠습니다."
+
+■ 6) 이력서 및 자기소개서 업데이트 완료
+• 이력서 프로젝트 항목: 'NEXUS-GUARD AI 기반 엔터프라이즈 능동 방어 보안 관제 콘솔 (v2.5.0-LTS)' 추가 완료
+• 자기소개서 문제해결 경험: STAR 기법 기반 4대 심층 에세이 수록
+  - 1. 오탐과 의존성을 제거한 무결점 클린 슬레이트(Clean Slate) 보안 관제 솔루션 구축
+  - 2. 단순 탐지를 넘어 즉각 격리와 1초 복구를 실현한 차세대 Active Defense 체계
+  - 3. 0.48초 초고속 LPU와 심층 추론을 결합한 4중 AI-XDR 하이브리드 파이프라인
+  - 4. 전사 보안 컴플라이언스(ISMS-P, ISO 27001) 및 크로스 도메인 보안 거버넌스 완성
+• CISO 기술 압박 면접 질문 4선 모범 답변 플레이북 완비 (상용 WAF 대비 BOLA 차별성, 100점 베이스라인 철학, 디코이 우회 3중 심층 방어선, Standalone 무중단 페일세이프)
+• 포트폴리오 자료 정리 완료:
+  - 개인 웹 포트폴리오: https://nexus-portfolio-nu.vercel.app
+  - 발표 슬라이드 PPTX 및 포트폴리오 PDF: 바탕화면 'NEXUS-GUARD_포트폴리오' 폴더에 완비
